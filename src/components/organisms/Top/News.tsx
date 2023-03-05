@@ -13,12 +13,12 @@ const News: React.FC<Props> = (props) => (
       <div className="my-2">
         <span className="bg-gray-300 py-1 px-2 text-xs font-bold">Hatena</span>
       </div>
-      <div className="text-xs font-light">
+      <div className="font-light">
         {props.feedItems
           .filter((v) => v.type === "hatena")
           .slice(0, 3)
           .map((v) => (
-            <div key={v.title} className="mb-3">
+            <div key={v.title} className="mb-5">
               <div>{dayjs(v.createdAt).format("YYYY-MM-DD")}</div>
               <a href={v.url} target="_blank" rel="noopener noreferrer">
                 {v.title}
@@ -40,11 +40,11 @@ const News: React.FC<Props> = (props) => (
       <div className="my-2">
         <span className="bg-gray-300 py-1 px-2 text-xs font-bold">Zenn</span>
       </div>
-      <div className="text-xs font-light">
+      <div className="font-light">
         {props.feedItems
           .filter((v) => v.type === "zenn")
           .map((v) => (
-            <div key={v.title}>
+            <div key={v.title} className="mb-5">
               <div>{dayjs(v.createdAt).format("YYYY-MM-DD")}</div>
               <div>
                 <a href={v.url} target="_blank" rel="noopener noreferrer">
