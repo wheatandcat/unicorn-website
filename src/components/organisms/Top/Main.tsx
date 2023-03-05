@@ -13,7 +13,7 @@ const Main = () => (
     </div>
     <div className="py-4">
       <Image
-        src="/main_screen.svg"
+        src="/main_screen.jpg"
         alt="main screen"
         width={1000}
         height={600}
