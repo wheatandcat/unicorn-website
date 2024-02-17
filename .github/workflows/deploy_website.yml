@@ -16,6 +16,10 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      deployments: write
+      statuses: write
     steps:
       - uses: actions/checkout@v4
       - uses: nexterias/actions-vercel@v1
