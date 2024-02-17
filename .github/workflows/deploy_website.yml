@@ -17,30 +17,17 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
         with:
-          node-version: 16.x
+          node-version: 18
           cache: yarn
-      - name: Cache node_modules
-        uses: actions/cache@v3
-        with:
-          path: ~/.cache/yarn
-          key: ${{ runner.os }}-unicorn-website-${{ hashFiles(format('{0}{1}', github.workspace, '/yarn.lock')) }}
-          restore-keys: ${{ runner.os }}-unicorn-website-
-      - name: Install node_modules
-        if: steps.cache.outputs.cache-hit != 'true'
-        run: yarn install
-      # 投稿内容を更新するために npm run build:posts を走らせる
-      - name: build
-        shell: bash
-        run: yarn build
-      - uses: amondnet/vercel-action@v20
-        with:
-          # GitHub Actions の Secrets で作成した値を参照する形で
-          # Vercel デプロイ時に必要となる各種パラメタを設定する
-          vercel-token: ${{ secrets.VERCEL_TOKEN }} # Required
-          vercel-args: "--prod" # Optional
-          vercel-org-id: ${{ secrets.ORG_ID}} #Required
-          vercel-project-id: ${{ secrets.PROJECT_ID}} #Required
-          working-directory: ./
+          cache-dependency-path: yarn.lock
+      - name: Install Vercel CLI
+        run: npm i -g vercel
+
+      - name: Deploy to Vercel
+        run: vercel --token ${{ secrets.VERCEL_TOKEN }} --prod
+        env:
+          VERCEL_ORG_ID: ${{ secrets.ORG_ID }}
+          VERCEL_PROJECT_ID: ${{ secrets.PROJECT_ID }}d
