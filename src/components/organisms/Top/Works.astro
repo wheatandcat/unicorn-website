@@ -1,0 +1,28 @@
+---
+const items = [
+  {
+    title: 'memoir',
+    url: 'https://memoir-app.dev',
+    src: '/memoir.svg',
+  },
+  {
+    title: 'peperomia',
+    url: 'https://peperomia.app',
+    src: '/pepromia.svg',
+  },
+]
+---
+<div>
+  <h1 class="text-2xl mb-7">Works</h1>
+  <div class="flex flex-wrap">
+    {items.map((v) => (
+      <div class="mb-8 md:mr-20">
+        <a href={v.url} target="_blank" rel="noopener noreferrer">
+          <img src={v.src} alt={v.title} width="450" height="300" />
+          <div class="text-sm">{v.title}</div>
+          <div class="text-xs font-light">{v.url}</div>
+        </a>
+      </div>
+    ))}
+  </div>
+</div>

@@ -1,0 +1,16 @@
+---
+import Layout from '@/layouts/Layout.astro'
+import Page from '@/components/templates/Top/Page.astro'
+import { getZennRssFeed, getHatenaRssFeed, type FeedItem } from '@/lib/feed'
+
+const zennArticles = await getZennRssFeed()
+const hatenaArticles = await getHatenaRssFeed()
+const feedItems: FeedItem[] = [...zennArticles, ...hatenaArticles].sort(
+  (a, b) => (a.createdAt < b.createdAt ? 1 : -1)
+)
+---
+<Layout>
+  <main class="flex flex-col items-center py-8 px-4 md:px-24 min-h-screen container mx-auto">
+    <Page feedItems={feedItems} />
+  </main>
+</Layout>
