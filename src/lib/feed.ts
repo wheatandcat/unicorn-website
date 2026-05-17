@@ -1,16 +1,18 @@
-import Parser from 'rss-parser'
+import Parser from "rss-parser";
 
 export type FeedItem = {
-    type: string
-    title: string
-    createdAt: string
-    url: string
-}
+  type: string;
+  title: string;
+  createdAt: string;
+  url: string;
+};
 
-export const getZennRssFeed = async ():Promise<FeedItem[]> => {
-  const feed = await new Parser().parseURL('https://zenn.dev/wheatandcat/feed?all=1')
- 
-  return feed.items.map(item => ({
+export const getZennRssFeed = async (): Promise<FeedItem[]> => {
+  const feed = await new Parser().parseURL(
+    "https://zenn.dev/wheatandcat/feed?all=1",
+  );
+
+  return feed.items.map((item) => ({
     type: "zenn",
     title: item.title ?? "",
     createdAt: item.pubDate
@@ -18,12 +20,12 @@ export const getZennRssFeed = async ():Promise<FeedItem[]> => {
       : new Date().toISOString(),
     url: item.link ?? "",
   }));
-}
+};
 
-export const getHatenaRssFeed = async ():Promise<FeedItem[]> => {
-  const feed = await new Parser().parseURL('https://www.wheatandcat.me/rss')
- 
-  return feed.items.map(item => ({
+export const getHatenaRssFeed = async (): Promise<FeedItem[]> => {
+  const feed = await new Parser().parseURL("https://www.wheatandcat.me/rss");
+
+  return feed.items.map((item) => ({
     type: "hatena",
     title: item.title ?? "",
     createdAt: item.pubDate
@@ -31,4 +33,4 @@ export const getHatenaRssFeed = async ():Promise<FeedItem[]> => {
       : new Date().toISOString(),
     url: item.link ?? "",
   }));
-}
+};
