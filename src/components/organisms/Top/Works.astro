@@ -2,13 +2,27 @@
 const items = [
   {
     title: "memoir",
+    urlText: "https://memoir-app.dev",
     url: "https://memoir-app.dev",
     src: "/memoir.svg",
   },
   {
-    title: "peperomia",
-    url: "https://peperomia.app",
-    src: "/pepromia.svg",
+    title: "カウカウ - 架空のショッピングサイト",
+    urlText: "https://kawkaw.app/",
+    url: "https://kawkaw.app/",
+    src: "/kawkaw.svg",
+  },
+  {
+    title: "OOMAKA",
+    urlText: "https://oomaka.vercel.app",
+    url: "https://oomaka.vercel.app",
+    src: "/OOMAKA.svg",
+  },
+  {
+    title: "MarkyLinky",
+    urlText: "Chrome Web Store",
+    url: "https://chromewebstore.google.com/detail/markylinky/kjjjfmbnaamaogjpjdgeiffgjabbpmfp",
+    src: "/markyLinky.svg",
   },
 ];
 ---
@@ -18,11 +32,11 @@ const items = [
   <div class="flex flex-wrap">
     {
       items.map((v) => (
-        <div class="mb-8 md:mr-20">
+        <div class="mb-8 md:mr-10">
           <a href={v.url} target="_blank" rel="noopener noreferrer">
-            <img src={v.src} alt={v.title} width="450" height="300" />
+            <img src={v.src} alt={v.title} width="300" />
             <div class="text-sm">{v.title}</div>
-            <div class="text-xs font-light">{v.url}</div>
+            <div class="text-xs font-light">{v.urlText}</div>
           </a>
         </div>
       ))
