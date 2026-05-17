@@ -13,19 +13,30 @@ on:
   # 実行の際に参照されるブランチは上記の default で指定したものが使用される
   schedule:
     - cron: "0 2 * * *"
+  push:
+    branches:
+      - main
 jobs:
   deploy:
     runs-on: ubuntu-latest
     permissions:
       contents: read
       deployments: write
-      statuses: write
     steps:
       - uses: actions/checkout@v4
-      - uses: nexterias/actions-vercel@v1
         with:
-          token: ${{ secrets.VERCEL_TOKEN }}
-          org-id: ${{ secrets.ORG_ID }}
-          project-id: ${{ secrets.PROJECT_ID }}
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          production: ${{ github.ref == 'refs/heads/main' }}
+          ref: ${{ github.event.inputs.ref || github.ref }}
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: "npm"
+      - run: npm ci
+      - run: npm run build
+      - uses: cloudflare/pages-action@v1
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          projectName: unicorn-website
+          directory: dist
+          gitHubToken: ${{ secrets.GITHUB_TOKEN }}
+          branch: main

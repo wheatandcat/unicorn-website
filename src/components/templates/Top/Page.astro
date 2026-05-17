@@ -1,0 +1,23 @@
+---
+import type { FeedItem } from '@/lib/feed'
+import Main from '@/components/organisms/Top/Main.astro'
+import News from '@/components/organisms/Top/News.astro'
+import Works from '@/components/organisms/Top/Works.astro'
+import Company from '@/components/organisms/Top/Company.astro'
+
+interface Props {
+  feedItems: FeedItem[]
+}
+
+const { feedItems } = Astro.props
+---
+<div>
+  <Main />
+  <News feedItems={feedItems} />
+  <div class="border-black border mb-4" />
+  <Works />
+  <div class="border-black border mb-4" />
+  <Company />
+  <div class="border-black border mb-4" />
+  <div class="text-xs text-center py-4">2022 UNICORN.LCC</div>
+</div>
