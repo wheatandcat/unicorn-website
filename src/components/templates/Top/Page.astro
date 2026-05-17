@@ -1,23 +1,24 @@
 ---
-import type { FeedItem } from '@/lib/feed'
-import Main from '@/components/organisms/Top/Main.astro'
-import News from '@/components/organisms/Top/News.astro'
-import Works from '@/components/organisms/Top/Works.astro'
-import Company from '@/components/organisms/Top/Company.astro'
+import type { FeedItem } from "@/lib/feed";
+import Main from "@/components/organisms/Top/Main.astro";
+import News from "@/components/organisms/Top/News.astro";
+import Works from "@/components/organisms/Top/Works.astro";
+import Company from "@/components/organisms/Top/Company.astro";
 
 interface Props {
-  feedItems: FeedItem[]
+  feedItems: FeedItem[];
 }
 
-const { feedItems } = Astro.props
+const { feedItems } = Astro.props;
 ---
+
 <div>
   <Main />
   <News feedItems={feedItems} />
-  <div class="border-black border mb-4" />
+  <div class="border-black border mb-4"></div>
   <Works />
-  <div class="border-black border mb-4" />
+  <div class="border-black border mb-4"></div>
   <Company />
-  <div class="border-black border mb-4" />
+  <div class="border-black border mb-4"></div>
   <div class="text-xs text-center py-4">2022 UNICORN.LCC</div>
 </div>
